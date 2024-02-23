@@ -1,0 +1,97 @@
+---
+- name: Setup WordPress on Containers
+  hosts: web2
+  gather_facts: no
+  become: yes
+  vars:
+    wordpress_db_name: mywordpressdb
+    wordpress_db_user: wordpressuser
+    wordpress_db_password: mypassword
+    wordpress_container_name: wordpress
+    mysql_root_password: rootpassword
+    mysql_container_name: mysql
+
+  tasks:
+    - name: Create a network
+      docker_network:
+        name: wordpress
+
+    - name: Pull MySQL Docker image
+      docker_image:
+        name: mysql:latest
+
+    - name: Start MySQL container
+      docker_container:
+        name: "{{ mysql_container_name }}"
+        image: mysql:5.7
+        state: started
+        restart_policy: always
+        env:
+          MYSQL_ROOT_PASSWORD: "{{ mysql_root_password }}"
+        ports:
+          - "3306:3306"
+        volumes:
+          - "/opt/mysql-data:/var/lib/mysql"
+        networks:
+          - name: wordpress
+
+    - name: Wait for MySQL to initialize
+      wait_for:
+        host: localhost
+        port: 3306
+        state: started
+        delay: 5
+        timeout: 60
+
+    - name: Create WordPress database
+      mysql_db:
+        name: "{{ wordpress_db_name }}"
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        state: present
+
+    - name: Create WordPress database user
+      mysql_user:
+        name: "{{ wordpress_db_user }}"
+        password: "{{ wordpress_db_password }}"
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        state: present
+
+    - name: Grant privileges to WordPress database user
+      mysql_user:
+        name: "{{ wordpress_db_user }}"
+        priv: "{{ wordpress_db_name }}.*:ALL"
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        state: present
+
+    - name: Pull WordPress Docker image
+      docker_image:
+        name: wordpress:latest
+
+    - name: Start WordPress container
+      docker_container:
+        name: "{{ wordpress_container_name }}"
+        image: wordpress:latest
+        state: started
+        restart_policy: always
+        env:
+          WORDPRESS_DB_HOST: "{{ mysql_container_name }}"
+          WORDPRESS_DB_NAME: mywordpressdb
+          WORDPRESS_DB_USER: root
+          WORDPRESS_DB_PASSWORD: rootpassword
+        ports:
+          - "8080:80"
+        volumes:
+          - "/opt/wordpress-data:/var/www/html"
+        networks:
+          - name: wordpress
+
+    - name: Wait for WordPress to initialize
+      wait_for:
+        host: localhost
+        port: 8080
+        state: started
+        delay: 5
+        timeout: 60
