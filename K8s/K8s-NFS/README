@@ -22,3 +22,8 @@ kubectl exec -it nfs-nginx-66bcd8b957-7vl2g bash
 cd /srv/nfs/share
 ls -l
 cd default-nfs-pvc-pvc-8a531138-1a09-4e7e-a963-fbec5ecd0a41/
+
+########### CleanUp ##############
+kubectl apply -f nfs-deployment.yaml
+kubectl apply -f nfs-svc.yaml
+kubectl apply -f nfs-pvc.yaml
