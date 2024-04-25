@@ -16,4 +16,9 @@ nfs-subdir-external-provisioner/nfs-subdir-external-provisioner \
 --set nfs.server=10.124.0.9 \
 --set nfs.path=/data/nfs \
 --set storageClass.onDelete=true
-  
+
+
+
+# Check pods and storage classes:
+kubectl get pod
+kubectl get sc
