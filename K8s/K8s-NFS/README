@@ -6,6 +6,8 @@ Step 3: Install and Configure NFS Client Provisioner  ---> helm-setup
 
 Step 4: Dynamic PVC Volume Create Testing:
 
+kubectl apply -f nfs-pvc.yaml
+kubectl apply -f nfs-deployment.yaml
 kubectl get po
 kubectl exec -it nfs-nginx-66bcd8b957-7vl2g bash
 #now we are into pod
