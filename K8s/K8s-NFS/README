@@ -1,4 +1,4 @@
-Step 1: Installing the NFS Server
+Step 1: Installing the NFS Server    ---> NFS-Server
 
 Step 2: Install NFS client packages on K8s Nodes
 
