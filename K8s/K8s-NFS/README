@@ -1,8 +1,8 @@
 Step 1: Installing the NFS Server    ---> NFS-Server
 
-Step 2: Install NFS client packages on K8s Nodes
+Step 2: Install NFS client packages on K8s Nodes   ---> NFS-Server
 
-Step 3: Install and Configure NFS Client Provisioner
+Step 3: Install and Configure NFS Client Provisioner  ---> helm-setup
 
 Step 4: Dynamic PVC Volume Create Testing:
 
