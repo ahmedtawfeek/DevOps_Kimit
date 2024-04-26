@@ -4,4 +4,4 @@ metadata:
   name: todo-app-configmap
 data:
   MYSQL_DATABASE: notes_db
-  DATABASE_URL: ""
+  DATABASE_URL: todo-service
