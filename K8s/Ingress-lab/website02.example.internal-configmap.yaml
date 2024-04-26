@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: website02-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Welcome to My Website</title>
+    </head>
+    <body>
+        <h1>website02.example.internal</h1>
+    </body>
+    </html>
