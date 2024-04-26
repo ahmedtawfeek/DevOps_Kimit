@@ -1,3 +1,5 @@
+
+
 Step1: Applying ConfigMap for the 2 Pods index html.
 
 kubectl apply -f website01.example.internal-configmap.yaml
