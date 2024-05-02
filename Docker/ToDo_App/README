@@ -1,1 +1,12 @@
+Step1: Git clone the repo
 
+Step2: Building the app Docker image
+cd app
+vim Dockefile ----> check the dockerfile
+docker build -t todo_app:v1 .
+
+Step3: start the container using the image
+
+docker run -dp 3000:3000 todo_app:v1
+
+Step4: check the application is accessible using host Ip and Port
