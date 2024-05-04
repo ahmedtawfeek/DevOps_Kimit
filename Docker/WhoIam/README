@@ -1,0 +1,17 @@
+Step1: Getting Started
+
+git clone the repo
+cd the Repo
+check the index.js and Dockerfile
+
+Step2: Building the Docker image
+
+docker build -t awesome .
+
+Step3:
+
+docker service create --name awesome --replicas 5 -p 8080:8080 awesome:v1
+
+Step4: Try to connect to the website several time
+
+ curl http://<IP_ADDRESS>:8080/
