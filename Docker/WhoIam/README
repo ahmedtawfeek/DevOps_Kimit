@@ -15,3 +15,6 @@ docker service create --name awesome --replicas 5 -p 8080:8080 awesome:v1
 Step4: Try to connect to the website several time
 
  curl http://<IP_ADDRESS>:8080/
+
+
+docker run -d --name haproxy -p 80:80 -v /$PWD/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg haproxy:latest
