@@ -64,5 +64,63 @@ kubectl config set-context developer-context --cluster=kubernetes --namespace=de
 
 kubectl config use-context developer-context --kubeconfig=developer.kubeconfig
 
+**Step 6: Verify the kubeconfig file’s configuration**
 
+kubectl --kubeconfig=developer.kubeconfig get pods
+
+> [!WARNING]
+> It Should fail we need to create the Role and RoleBinding First
+
+
+**Step 7: Assign Roles for the Developer User**
+
+developer-cluster-role.yaml
+
+cat <<EOF > developer-cluster-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: developer-role
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["*"]
+  verbs: ["*"]
+EOF
+
+**Step 8: Assign Roles binding for the Developer User**
+
+developer-role-binding.yaml
+
+cat <<EOF > developer-role-binding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-binding
+  namespace: default
+subjects:
+- kind: User
+  name: developer
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: developer-role
+  apiGroup: rbac.authorization.k8s.io
+EOF
+
+**Step 9: Apply the roles and role bindings**
+
+kubectl apply -f developer-cluster-role.yaml -f developer-role-binding.yaml
+
+**Step 10: Verify developer User Rights**
+
+kubectl --kubeconfig=developer.kubeconfig get pods
+kubectl --kubeconfig=developer.kubeconfig run nginx --image=nginx
+kubectl --kubeconfig=developer.kubeconfig get pods
+
+**Step 11: confirms that the developer user has appropriate access to pods in the default namespace**
+
+kubectl --kubeconfig=developer.kubeconfig get pods -A
+
+> [!WARNING]
+> It Should fail.
 
