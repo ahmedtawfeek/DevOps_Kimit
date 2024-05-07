@@ -47,7 +47,7 @@ kubectl config set-cluster kubernetes — server=https://<Kubernetes_API_server_
 :+1: ls /etc/kubernetes/pki/
 
 > [!TIP]
->kubectl config set-cluster kubernetes — server=https://192.168.1.103:6443 — certificate-authority=/etc/kubernetes/pki/ca.crt — embed-certs=true — kubeconfig=developer.kubeconfig
+>kubectl config set-cluster kubernetes --server=https://192.168.1.103:6443 --certificate-authority=/etc/kubernetes/pki/ca.crt --embed-certs=true --kubeconfig=developer.kubeconfig
 
 >[!CAUTION]
 >Replace <Kubernetes_API_server_endpoint> with the address of the Kubernetes API server and <port> with the corresponding port number.  
