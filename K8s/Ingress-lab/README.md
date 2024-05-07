@@ -22,8 +22,11 @@ kubectl describe svc website02-service
 **Step4: Configure Ingress Controller**
 
 helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace
+
 helm list --all-namespaces
+
 kubectl get ingressclass
+
 kubectl get service -n ingress-nginx
 
 
