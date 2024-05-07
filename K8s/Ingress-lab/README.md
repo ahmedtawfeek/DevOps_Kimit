@@ -40,6 +40,7 @@ kubectl apply -f ingress.yaml
 Execute this command and change strictARP to true
 
 Edit strictARP: from false to true
+
 kubectl edit configmap -n kube-system kube-proxy
 
 installation apply this manifest
@@ -49,15 +50,18 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.10/conf
 kubectl get pods -n metallb-system
 
 kubectl apply -f metallb.yaml
+
 kubectl rollout restart deployment deployment controller -n metallb-system
 
 
 **Step7: Applly Bellow on the Master node**
 
 vim /etc/hosts
+
 <ADD-LOAD-BALANCER-IP> website01.example.internal website02.example.internal
 
 curl website01.example.internal
+
 curl website02.example.internal
 
 
