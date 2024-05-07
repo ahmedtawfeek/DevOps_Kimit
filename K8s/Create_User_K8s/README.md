@@ -1,6 +1,7 @@
 **Step 1: Generating a Key Pair and Certificate Signing Request (CSR)**
 
 openssl genrsa -out developer.key 2048
+
 openssl req -new -key developer.key -out developer.csr -subj "/CN=developer"
 
 **Step 2: let’s create create a CSR YAML file named “csr_template.yaml” to submit to Kubernetes**
@@ -20,6 +21,7 @@ EOF
 **Step 3: Replace <Base64_encoded_CSR> with the Base64-encoded content of the developer.csr file**
 
 CSR_CONTENT=$(cat developer.csr | base64 | tr -d '\n')
+
 sed "s|<Base64_encoded_CSR>|$CSR_CONTENT|" csr_template.yaml > developer_csr.yaml
 
 **Step 4: Apply the CSR YAML file to Kubernetes**
