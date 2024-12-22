@@ -62,6 +62,9 @@ Step8: Create ConfigMap for SQL database tables Creation
 
 kubectl create configmap mysql-init-config --from-file=init.sql
 
+Step9: Apply PVC for DB
+kubectl apply -f Full_todo-app-pvc.yaml
+
 Step3: DB Deployment
 
 kubectl apply -f Full_deplyment_db.yaml
