@@ -3,3 +3,24 @@ Step 1: Installing the NFS Server    ---> NFS-Server
 Step 2: Install NFS client packages on K8s Nodes   ---> NFS-Server
 
 Step 3: Install and Configure NFS Client Provisioner  ---> helm-setup
+
+
+Step4: Deploy the secrts
+
+kubectl apply -f Secrts.yaml*
+
+Step5: Deploy the ConfigMaps
+
+kubectl apply -f ConfigMap.yaml
+
+Step6: App Deployment
+
+kubectl apply -f deplyment.yaml
+
+Step7: App Service Deployment
+
+Kubectl apply -f service.yaml
+
+Step8: Create ConfigMap for SQL database tables Creation
+
+kubectl create configmap mysql-init-config --from-file=init.sql
