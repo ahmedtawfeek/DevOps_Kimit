@@ -61,3 +61,11 @@ Kubectl apply -f Full_service.yaml
 Step8: Create ConfigMap for SQL database tables Creation
 
 kubectl create configmap mysql-init-config --from-file=init.sql
+
+Step3: DB Deployment
+
+kubectl apply -f Full_deplyment_db.yaml
+
+Step4: App Service Deployment
+
+Kubectl apply -f Full_service_db.yaml
