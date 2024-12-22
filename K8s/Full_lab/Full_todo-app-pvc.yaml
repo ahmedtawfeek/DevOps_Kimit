@@ -8,4 +8,4 @@ spec:
       storage: 3Gi
   accessModes:
     - ReadWriteOnce
-  storageClassName: todo-app-volume
+  storageClassName: nfs-client
