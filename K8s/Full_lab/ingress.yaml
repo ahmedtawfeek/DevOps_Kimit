@@ -12,16 +12,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: website01-service
+            name: todo-app-service
             port:
               number: 80
-  - host: website02.example.internal
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: website02-service
-            port:
-              number: 80
+ 
