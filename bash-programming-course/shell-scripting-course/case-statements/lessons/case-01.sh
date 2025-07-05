@@ -2,9 +2,12 @@
 
 case "$1" in
     start)
-        /usr/sbin/sshd
+        systemctl start ssh.service
         ;;
     stop)
-        kill $(cat /var/run/sshd.pid)
+        systemctl stop ssh.service
+        ;;
+    status)
+        systemctl status ssh.service
         ;;
 esac
