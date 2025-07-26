@@ -1,22 +1,12 @@
-name: Deploy to Kubernetes
-
 on:
   workflow_dispatch:
     inputs:
-      image_sha:
-        description: 'Docker Image SHA'
+      service_name:
+        description: 'K8s Deployment name to patch (e.g., service-a)'
         required: true
-        default: 'latest'
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set image tag
-        run: echo "IMAGE_TAG=${{ github.event.inputs.image_sha }}" >> $GITHUB_ENV
-
-      - name: Echo the SHA
-        run: echo "Image SHA provided:${{ github.event.inputs.image_sha }}"
+      namespace:
+        description: 'K8s Namespace (e.g., dev)'
+        required: true
+      image_tag:
+        description: 'New image tag (e.g., sha256:abcd1234 or latest)'
+        required: true
