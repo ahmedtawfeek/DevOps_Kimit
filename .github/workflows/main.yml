@@ -1,12 +1,24 @@
 on:
   workflow_dispatch:
     inputs:
-      service_name:
-        description: 'K8s Deployment name to patch (e.g., service-a)'
-        required: true
       namespace:
-        description: 'K8s Namespace (e.g., dev)'
+        description: 'Namespace'
         required: true
+        type: choice
+        options:
+          - back
+          - front
+          - keycloak
+
+      service_name:
+        description: 'Service (Deployment Name)'
+        required: true
+        type: choice
+        options:
+          - front
+          - back
+          - keycloak
+
       image_tag:
-        description: 'New image tag (e.g., sha256:abcd1234 or latest)'
+        description: 'New Image Tag or SHA'
         required: true
